@@ -1,34 +1,38 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-#include<stdlib.h>
+int strtoint( char* charnums)
+{
+ int number=0;
+ int index=0;
+ while(charnums[index])
+ {
+    if(('0'<=charnums[index]) && (charnums[index]<='9'))
+    {
 
-int isParameterDigit(char * inp);
-
-int main(int argc, char * arguments[]) {
-  int i;
-
-  if (isParameterDigit(arguments[1]) == 0) { 
-    printf(
-  } else {
-    for (i = 0; i < atoi(arguments[1]); i++) {
-      printf("%s", arguments[0]);
-      printf("\n");
-    }
-  }
-  return 0;
-
-}
-
-int isParameterDigit(char * inp) {
-
-  int index = 0;
-
-  while (inp[index] != '\0') {
-    if (isdigit(inp[index]) == 0) { 
-      return 0;
-      break;
+    if(!number)
+        number= ( (int) charnums[index]) - 48;
+    else
+    {
+        number = (number *= 10) + ((int) charnums[index] - 48);
     }
     index++;
-  }
-  return 1;
+         }
+         else
+         {
+            number=-1;
+            printf("yanlis parametre girdiniz\n");
+            break;
+         }
+ }
+ return number;
+}
+
+int main(int argc, char *inp[])
+{
+    int count = strtoint(inp[2]);
+    for(int i=0;i<count;i++){
+        printf("%s\n",inp[1]);
+    }
+    return 0;
 }
