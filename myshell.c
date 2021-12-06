@@ -1,16 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+int len(char *input[]);
 void command(char *input,char *inp[]);
-int len(char **input);
+
 int main(int argc, char *argv[],char ** envp)
 {
 	char *input;
 	input = (char*) malloc((100) * sizeof(char *));
 	char *temp= (char*) malloc((100) * sizeof(char *));
-	char *inp[4];
+	char **inp=((char **) malloc (100*sizeof(char**)));
 	char *devide=(char*) malloc((100) * sizeof(char *));;
-	int i=0;
+	int i=0, uzunluk=0,size=0;
 	while(1){
 		printf("myshell>>");
 		gets(input,100,stdin);
@@ -21,53 +23,74 @@ int main(int argc, char *argv[],char ** envp)
     		inp[i]=temp;
         	temp = strtok(NULL," ");
         	i++;
-		inp[4]=NULL;
+		size++;
     		}
-    		/*	
-		printf("------------------------ \n");
+    		printf("%d -- : \n",size);
+    		inp[size]=NULL;
+    		
+    		printf("------------------------ \n");
 		printf("inp[0]  --->%s\n",inp[0]);
 		printf("inp[1]  --->%s\n",inp[1]);
 		printf("inp[2]  --->%s\n",inp[2]);
 		printf("inp[3]  --->%s\n",inp[3]);
 		printf("inp[4]  --->%s\n",inp[4]);
-		
-		if(len(input)>4){
-		int count=0;
-		while(strcmp(inp[count],"|")==-1){
-			printf("inp[&d]  --->%s\n",count,inp[count]);
+		printf("inp[5]  --->%s\n",inp[5]);
+		printf("inp[6]  --->%s\n",inp[6]);
+		printf("%d: \n " ,len(input));
+	if(size<5){
+		char * dizi[5];
+		for(int i=0; i<5; i++){
+			dizi[i]=inp[i];
 		}
-		}	
-    		printf("------------------------ \n");
-		printf("devide[0]  --->%s\n",devide[0]);
-		printf("devide[1]  --->%s\n",devide[1]);
-		printf("devide[2]  --->%s\n",devide[2]);
-		printf("devide[3]  --->%s\n",devide[3]);
-		printf("devide[4]  --->%s\n",devide[4]);
-		
-		
-		printf("| var");
-			for(int j=0; j<len(inp); j++){
-			printf("%d \n",j);
-				printf("inp[%d]  --->---%s---\n",j,inp[j]);
-				if(strcmp(inp[j],"|")==0){
-				printf("| bulundu");
-				}
-			}
-		}	*/
-	
-		
+		dizi[5]=NULL;
 		command(input,inp);
+	//command dizi ile çağrılır
+	}
+	else{
+	int bol=0;
+		for(int i=0; i<size; i++){
+			if(strcmp(inp[i],"|")==0){
+				bol=i;
+				printf("bol: %d",bol);
+			}
+		}
+		char * first[bol];
+		for(int j=0; j<bol; j++){
+		first[j]=inp[j];
+		
+		}
+		first[bol]=NULL;
+		command(input,first);
+		printf("first[0]  --->%s\n",first[0]);
+		printf("first[1]  --->%s\n",first[1]);
+		printf("first[2]  --->%s\n",first[2]);
+		
+		char *second[size-bol];
+		int c=0;
+		for(int j=bol+1; j<size; j++){
+			second[c]=inp[j];
+			c++;
+		
+		}
+		second[size-bol]=NULL;
+		printf("second[0]  --->%s\n",second[0]);
+		printf("second[1]  --->%s\n",second[1]);
+		printf("second[2]  --->%s\n",second[2]);
+		printf("second[3]  --->%s\n",second[3]);
+		command(input,second);
+	}
+}
+}
+	
 
-    
-}
-}
-int len(char **input){
-    int size = 0;
-    while(input[size]!=NULL){
-        size++;
+int len(char *input[]){
+    int i=0;
+    while(input[i]!=NULL){
+    i++;
     }
-    return size+1;
+    return i+1;
 }
+
 
 void command(char *input,char *inp[]){
 	if(strcmp(input,"exit")==0){
@@ -130,6 +153,7 @@ void command(char *input,char *inp[]){
   	
   	}
 }
+
 
 
 
