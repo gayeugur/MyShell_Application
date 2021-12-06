@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-int len(char *input[]);
 void command(char *input,char *inp[]);
 
 int main(int argc, char *argv[],char ** envp)
@@ -82,15 +81,6 @@ int main(int argc, char *argv[],char ** envp)
 }
 }
 	
-
-int len(char *input[]){
-    int i=0;
-    while(input[i]!=NULL){
-    i++;
-    }
-    return i+1;
-}
-
 
 void command(char *input,char *inp[]){
 	if(strcmp(input,"exit")==0){
