@@ -6,13 +6,14 @@ void command(char *input,char *inp[]);
 
 int main(int argc, char *argv[],char ** envp)
 {
+	
+	while(1){
 	char *input;
 	input = (char*) malloc((100) * sizeof(char *));
 	char *temp= (char*) malloc((100) * sizeof(char *));
 	char **inp=((char **) malloc (100*sizeof(char**)));
-	char *devide=(char*) malloc((100) * sizeof(char *));;
+	//char *devide=(char*) malloc((100) * sizeof(char *));;
 	int i=0, uzunluk=0,size=0;
-	while(1){
 		printf("myshell>>");
 		gets(input,100,stdin);
 		
@@ -35,7 +36,7 @@ int main(int argc, char *argv[],char ** envp)
 		printf("inp[4]  --->%s\n",inp[4]);
 		printf("inp[5]  --->%s\n",inp[5]);
 		printf("inp[6]  --->%s\n",inp[6]);
-		printf("%d: \n " ,len(input));
+		
 	if(size<5){
 		char * dizi[5];
 		for(int i=0; i<5; i++){
@@ -78,9 +79,12 @@ int main(int argc, char *argv[],char ** envp)
 		printf("second[3]  --->%s\n",second[3]);
 		command(input,second);
 	}
+	free(input);
 }
+
 }
 	
+
 
 void command(char *input,char *inp[]){
 	if(strcmp(input,"exit")==0){
@@ -143,8 +147,3 @@ void command(char *input,char *inp[]){
   	
   	}
 }
-
-
-
-
-
